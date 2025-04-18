@@ -38,7 +38,8 @@ public class User {
         if(numOfUsername == 0 && password.length() >= 8){
             this.username = username;
             this.password = password;
-            this.behavior = RegularBehavior;
+            RegularBehavior regularBehavior = new RegularBehavior();
+            behavior = regularBehavior;
         }
         else if(numOfUsername != 0){
             throw new InvalidOperationException("An account with this name has already been created. Please try again.");
