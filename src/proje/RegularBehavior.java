@@ -12,7 +12,7 @@ public class RegularBehavior implements UserBehavior{
     @Override
     public void playMusic(Music music) {
         if(playingLimit != 0){
-            bayad play ro sedakoni
+            music.play();
             playingLimit--;
         }
         else {
@@ -23,6 +23,7 @@ public class RegularBehavior implements UserBehavior{
 
     @Override
     public void buyPremium(User owner, int month) {
-        bayad bokoni perimum
+        PremiumBehavior premiumBehavior = new PremiumBehavior();
+        owner.behavior() = premiumBehavior;
     }
 }
