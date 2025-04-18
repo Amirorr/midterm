@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public class Playlist {
     private String title;
-    private String user;
+    private User user;
     public ArrayList<Music> playlist = new ArrayList<>();
 
-    public Playlist(String title, String user) {
+    public Playlist(String title, User user) {
         this.title = title;
         this.user = user;
     }
@@ -22,18 +22,18 @@ public class Playlist {
         this.title = title;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
 
     public void editTitle(String oldName, String newName, String password) throws InvalidOperationException {
 
-        if (getUser().password != password) {
+        if (getUser().getPassword() != password) {
             throw new InvalidOperationException("The password is incorrect. Please try again. ");
         }
 
@@ -48,7 +48,7 @@ public class Playlist {
         if (playlist.contains(music)) {
             throw new InvalidOperationException("this music already exist.");
         }
-        if (getUser().password != password) {
+        if (getUser().getPassword()!= password) {
             throw new InvalidOperationException("The password is incorrect. Please try again. ");
         }
         playlist.add(music);
@@ -56,14 +56,14 @@ public class Playlist {
     }
 
     public void removeMusic(Music music, String password) throws InvalidOperationException {
-        if (getUser().password != password) {
+        if (getUser().getPassword() != password) {
             throw new InvalidOperationException("The password is incorrect. Please try again. ");
         }
 
         if (!playlist.contains(music)) {
             throw new InvalidOperationException("this music not exist");
         }
-        playlist.remove(music)
+        playlist.remove(music);
     }
 
     public ArrayList<Music> searchInPlaylist(String title) {
@@ -86,12 +86,12 @@ public class Playlist {
         return null;
     }
 
-    public void playPlaylist (){
+    public void playPlaylist() {
         Scanner scanner = new Scanner(System.in);
-        if(scanner.nextLine().equals("next")) {
+        if (scanner.nextLine().equals("next")) {
             for (Music music : playlist) {
-                music.play();
-                if (scanner.nextLine() != "next") {
+                music.play(music);
+                if (!scanner.nextLine().equals("next")) {
                     break;
                 }
             }
